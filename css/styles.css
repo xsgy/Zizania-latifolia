@@ -1,0 +1,412 @@
+/* 基础样式精简版 */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background: #f8fafb;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 标题栏优化 */
+header {
+    position: relative;
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+    padding: 1.2rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden; /* 防止伪元素溢出 */
+}
+
+/* 动态叶子特效 */
+header::before {
+    content: "Zizania latifolia"; /* FontAwesome 叶子图标 */
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 2.5rem;
+    animation: floatingLeaf 8s linear infinite;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+@keyframes floatingLeaf {
+    0% {
+        left: -30px;
+        transform: translateY(-50%) rotate(0deg);
+    }
+    100% {
+        left: 110%;
+        transform: translateY(-50%) rotate(720deg);
+    }
+}
+
+/* 标题增强 */
+header h1 {
+    position: relative;
+    color: white;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateX(15px);
+    padding-left: 2.8rem !important;
+}
+
+header h1::before {
+    content: "\f06c"; /* FontAwesome 叶子图标 */
+    font-family: "Font Awesome 5 Free";
+    position: absolute;
+    left: 0;
+    font-size: 1.4em;
+    color: #fff !important;
+    animation: leafFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 2px 4px rgba(255, 255, 255, 0.3));
+    will-change: transform;
+}
+
+@keyframes leafFloat {
+    0%, 100% {
+        transform: translate(-5px, 2px) rotate(-15deg) scale(0.95);
+    }
+    50% {
+        transform: translate(5px, -3px) rotate(10deg) scale(1.05);
+    }
+}
+
+/* 主内容区新布局 */
+main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 24px;
+    padding: 24px;
+    background: #f8fafb;
+}
+
+/* 左侧面板交互优化 */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section.collapsed {
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* 可折叠标题交互 */
+.clickable-header {
+    padding: 16px;
+    font-weight: 600;
+    color: #2d3748;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.2s;
+}
+
+.clickable-header:hover {
+    background: #f7fafc;
+}
+
+.clickable-header::after {
+    content: "▼";
+    float: right;
+    font-size: 0.8em;
+    color: #718096;
+    transition: transform 0.3s;
+}
+
+.section.collapsed .clickable-header::after {
+    transform: rotate(-90deg);
+}
+
+/* 内容区域动画 */
+.section-content {
+    overflow: hidden;
+    max-height: 500px;
+    transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.upload-box {
+    width: 25%;
+    padding: 12px;
+    background: #3a3a3a;
+    color: #fff;
+    border: 2px solid #5a5a5a;
+    border-radius: 4px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    box-shadow:
+        inset 0 2px 4px rgba(255,255,255,0.1),
+        0 2px 4px rgba(0,0,0,0.2);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.param-button {
+    flex-grow: 1;
+    padding: 15px;
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    font-family: 'Segoe UI', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 2px rgba(0,0,0,0.2);
+    box-shadow:
+        0 3px 6px rgba(0,0,0,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.15);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* 悬停效果增强 */
+.upload-box:hover {
+    background: #4a4a4a;
+    transform: translateY(-1px);
+    border-color: #6a6a6a;
+    box-shadow:
+        inset 0 2px 6px rgba(255,255,255,0.2),
+        0 4px 8px rgba(0,0,0,0.25);
+}
+
+.param-button:hover {
+    transform: translateY(-2px) scale(1.02);
+    background: linear-gradient(145deg, #45a049, #3e8e41);
+    box-shadow:
+        0 5px 12px rgba(0,0,0,0.2),
+        inset 0 1px 0 rgba(255,255,255,0.2);
+}
+
+/* 容器样式补充 */
+.button-row {
+    display: flex;
+    gap: 10px;
+    align-items: stretch;
+    margin: 0 16px 16px;
+}
+/* 添加图标系统 */
+.upload-box, .param-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* 图标文字间距 */
+}
+
+/* 上传按钮图标 */
+.upload-box::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f093"; /* 上传图标 */
+    font-weight: 900;
+    font-size: 0.9em;
+    filter: drop-shadow(0 1px 1px rgba(0,0,0,0.3));
+}
+
+/* 参数按钮图标 */
+.param-button::before {
+    font-family: "Font Awesome 5 Free";
+    content: "\f013"; /* 齿轮图标 */
+    font-weight: 900;
+    font-size: 1.1em;
+    animation: gearRotate 6s linear infinite;
+}
+
+/* 图标动态 */
+@keyframes gearRotate {
+    0% { transform: rotate(0deg) }
+    100% { transform: rotate(360deg) }
+}
+
+/* 图标悬停效果 */
+.upload-box:hover::before {
+    transform: translateY(-1px);
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.4));
+}
+
+.param-button:hover::before {
+    animation-duration: 3s; /* 悬停加速旋转 */
+}
+
+/* 调整原有padding */
+.upload-box {
+    padding: 8px 15px !important; /* 增加水平内边距 */
+}
+
+.param-button {
+    padding: 15px 20px !important;
+}
+/* 图片预览区域 */
+.image-preview-container {
+    width: 80;
+    height: 180px;
+    border: 2px dashed  #cbd5e0;
+    border-radius: 8px;
+    margin: 0 16px 16px;
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.image-preview-container img {
+    max-width: 100%;
+    max-height: 180px;
+    object-fit: contain;
+    border-radius: 6px;
+}
+
+
+
+
+/* 右侧面板优化 */
+.right-panel {
+    grid-column: 2; /* 强制定位到第二列 */
+    grid-row: 1;    /* 保持在同一行 */
+    height: calc(100vh - 96px); /* 视口高度减去header和padding */
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.05);
+    padding: 24px;
+    position: sticky;
+    top: 96px; /* 跟随滚动 */
+    overflow-y: auto;
+}
+
+
+
+/* 响应式布局增强 */
+@media (max-width: 768px) {
+    main {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .left-panel {
+        gap: 12px;
+    }
+
+    .section {
+        border-radius: 8px;
+    }
+}
+
+/* 表格样式 */
+.result-table {
+    width: 100%;
+    border-collapse: collapse; /* 合并表格边框 */
+    margin-top: 20px;
+}
+
+.result-table th, .result-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.result-table th {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.result-table td {
+    background-color: #f9f9f9;
+    font-size: 1rem;
+}
+
+/* 行hover效果 */
+.result-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* 表格列宽设置 */
+.result-table td:nth-child(1) {
+    width: 20%;
+    text-align: left;
+}
+
+.result-table td:nth-child(2),
+.result-table td:nth-child(3),
+.result-table td:nth-child(4),
+.result-table td:nth-child(5) {
+    width: 20%;
+}
+
+/* 表格交替行背景 */
+.result-table tr:nth-child(even) td {
+    background-color: #f4f4f4;
+}
+
+/* 给表格增加圆角 */
+.result-table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 表格字体大小 */
+.result-table td, .result-table th {
+    font-size: 1rem;
+}
+
+.loader-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: none; /* 默认隐藏 */
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  flex-direction: column;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #2ecc71; /* 绿色主题色 */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+.loader-text {
+  color: #333;
+  font-family: Arial;
+  font-size: 1.2rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 结果弹窗样式 */
+.result-modal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* 保持原有弹窗样式 */
+}
+
