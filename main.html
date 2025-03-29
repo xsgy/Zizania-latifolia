@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>茭白表型解析系统</title>
+    <link rel="stylesheet" href='css/styles.css'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>茭白表型解析系统</h1>
+        </header>
+        <main>
+            <div class="left-panel">
+                <!-- 表型模块循环 -->
+                <div class="section" id="jingjiaoSection">
+                    <div class="clickable-header">表型获取-净茭</div>
+                    <div class="section-content">
+                        <div id="imagePreviewContainer" class="image-preview-container"></div>
+                        <div class="button-row">
+                            <div class="upload-box" id="jingjiaoBox" >
+                                <input type="file" id="jingjiaoUpload" accept="image/*" onchange="handleFileSelect(event, 'imagePreviewContainer')" hidden>
+                                <div class="preview-placeholder" onclick="triggerFileInput('jingjiaoUpload')">上传图片</div>
+                            </div>
+                            <button class="param-button" onclick="handleButtonClick('jingjiaoBox')">获取参数</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- 其他模块略，同上 -->
+            </div>
+
+            <div class="right-panel">
+                <h2>分析结果</h2>
+                <div class="result-box">
+                    <div id="chartContainer"></div>
+                    <div id="parameterTable">
+                        <table class="result-table" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th>位置</th>
+                                    <th>颜色</th>
+                                    <th>形状</th>
+                                    <th>高度</th>
+                                    <th>宽度</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src='js/script.js'></script>
+</body>
+</html>
